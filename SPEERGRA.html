@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet"> 
+    <title>SPEERGRA</title>
+
+    <style>
+        @media only screen and (max-width: 600px) {
+        button, .btn, .btn-secondary {
+            padding: 2px !important;
+            margin: 2px !important;
+            font-size: 3vw !important;
+
+        }
+        #punkty,  #nazwa-pkt{
+            font-size: 4vw !important;
+        }
+        .grid-container {
+        width: 100vw;
+        height: 100vh;
+        display: grid;
+        grid-template-columns: 1fr 14fr 1fr !important;
+        grid-template-rows: 5fr 7fr 3fr 7fr !important;
+    }
+    .skokButton{
+        display: block !important;
+    }
+    .game-container{
+            position: relative !important;
+            bottom: 0px !important;
+            height: 100%;
+            vertical-align: bottom !important;
+            grid-column: 1/4;
+            grid-row: 2/3;
+        }
+    
+    .button-container{
+        display: grid;
+        grid-template: 1fr  1fr/ 1fr 1fr 1fr 1fr !important;
+        align-content: space-around;
+        grid-column: 1/4;
+        grid-row: 3/4;
+        }
+
+    }
+    *{
+        overflow: hidden;
+    }
+    body{
+    background-image: url(grafiki/speerflaga.png);
+    background-size:cover;
+    }
+    .body-speer{
+    background-image: url(grafiki/speerflaga.png);
+    background-size:cover;
+    }
+    .body-tabby{
+        background-image: url(grafiki/HRE.jpg);
+        background-size:cover;
+    }
+    .body-sablin{
+        background-image: url(grafiki/sablin.jpg);
+        background-size:cover;
+    }
+    .body-zhdanov{
+        background-image: url(grafiki/flag_zhdanov.webp);
+        background-size:cover;
+    }
+    .body-gum{
+        background-image: url(grafiki/eur.png);
+        background-size:cover;
+    }
+    .body-him{
+        background-image: url(grafiki/burg.png);
+        background-size:cover;
+    }
+    img{
+        width: 100%;
+        height: 100%;
+    }
+    .skokButton{
+        display: none;
+    }
+    div{
+        pad: 0px;
+        margin: 0px;
+    }
+    .grid-container {
+    width: 100vw;
+    height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 14fr 1fr;
+      grid-template-rows: 5fr 9fr 3fr 2fr;
+    }
+    .grid-item {
+      padding: 1px;
+      font-size: 30px;
+      text-align: center;
+    }
+    .game-container{
+        background-color: rgb(191,191,191);
+        position: relative;
+
+    }
+    .speer{
+        position: absolute;
+        height: 27%;
+        width: 6%;
+        left: 5%;
+        top: 70%;
+        z-index: 5;
+    }
+    .menu-container{
+        text-align: center;
+    }
+    .menu{
+        overflow: hidden;
+        text-align: center;
+        transition: 1s;
+    }
+    .menu-btn{
+        background-color:none;
+        z-index: 99;
+        text-align: center;  
+    }
+    .bb{
+        position: absolute;
+        height: 30%;
+        width: 10%;
+        left: 100%;
+        top: 70%;
+        animation: move 1.2s infinite linear;
+        z-index: 5;
+
+    }
+    .cc{
+        position:absolute ;
+        height: 30%;
+        width: 13%;
+        left: 100%;
+        top: 10%;
+        animation: move 4.4s infinite linear;
+        z-index: 1;
+
+    }
+    .dd{
+        position: absolute;
+        height: 25%;
+        width: 10%;
+        left: 100%;
+        top: 5%;
+        animation: move 3.1s infinite linear;
+        z-index: 1;
+
+    }
+    .ee{
+        position: relative;
+        background-color: rgb(115, 42, 193);
+        height: 25%;
+        width: 5%;
+        right: 70%;
+        top: 70%;
+    }
+
+    .germania{
+        position:absolute ;
+        width: 200%;
+        height: 100%;
+        left: 0%;
+        top: 0%;
+        animation: germania 10s infinite linear;
+    }
+    
+    @keyframes move {
+        0%{left: 120%}
+        100%{left:-20%}
+  }
+  @keyframes germania {
+        0%{left: 0%}
+        100%{left:-100%}
+  }
+  .skok{
+    animation: skok 0.6s  ;}
+
+    @keyframes skok{
+        0%{top: 20vh;}
+        30%{top: 10vh;}
+        70%{top: 10vh;}
+        100%{top: 20vh;}
+    }
+
+    .button-container{
+        display: grid;
+        grid-template: 1fr  1fr/ 1fr 1fr 1fr;
+        align-content: space-around;
+    }
+    .paused{
+        animation-play-state: paused;
+    }
+    button{
+        margin: 2px;
+        font-size: 1vw !important;
+    }
+    .point-point{
+        display: grid;
+
+    }
+    .point-container{
+        width: 100%;
+        text-align: left;
+        display: flex;
+    }
+    #punkty,  #nazwa-pkt{
+        display: inline-block;
+        align-self: flex-end;
+        margin: 1vh;
+        color: white;
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+        padding-bottom: 1vw;
+
+    }
+    .menu-main{
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        
+    }
+    .menubutton{
+        color: yellow; 
+        outline: none; 
+        border: none;
+        background-color: none;
+    }
+
+    .visible{
+        visibility: hidden;
+    }
+    .postacie{
+        border: 0px;
+        visibility: hidden;
+    }
+    .black{
+        border: solid black;
+        color: black;
+    }
+    .yellow, .guzik{
+        border: solid yellow;
+        color:yellow
+    }
+    .cel:hover{
+        background: none;
+        border: solid white ;
+    }
+    .cel:focus,.cel:active {
+        outline: none !important;
+        box-shadow: none;
+        }
+    .menubutton:hover{
+        background: none;
+        border: solid white;
+    }
+    .menubutton:focus,.menubutton:active {
+        outline: none !important;
+        box-shadow: none;
+        }
+
+    </style>
+    </head>
+    <body>
+    
+    
+    <div class="grid-container">
+      <div class="grid-item"></div>
+      <div class="grid-item point-point"><div class="point-container"><h1 id="nazwa-pkt">Reformy</h1><h1 id="punkty">: 0</h1></div></div>
+      <div class="grid-item"></div>  
+      <div class="grid-item"></div>
+      <div class="grid-item game-container">
+            <div class="speer" id="speer"><img src="grafiki/speer.png" alt=""></div>
+            <div class="bb cel1" id="big" id="move"><img src="grafiki/bigBuilding.png" alt=""></div>
+            <div class="cc cel1" id="ch1"><img src="grafiki/chmurka.png" alt="" class="src"></div>
+            <div class="dd cel1" id="ch2"><img src="grafiki/chmurka.png"></div>
+            <div class="germania cel1"><img src="grafiki/germania.png"></div>
+
+      </div>
+        <div class="grid-item menu-container" style="z-index: 999;">
+
+        </div>  
+      <div class="grid-item"></div>
+      <div class="grid-item button-container">
+        <button class="btn btn-secondary" onclick="vyatka()" >VYATKA</button>
+        <button class=" btn btn-secondary" onclick="instrukcja()">instrukcja</button>
+        <button class=" btn btn-secondary skokButton" onclick="phoneskok()">skok</button>
+        <button class=" btn btn-secondary" onclick="antychryst()">START/PAUZA</button>
+      </div>
+      <div class="grid-item"></div>  
+      <div class="grid-item"></div>  
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+
+    </div>
+    <div class="menu-main">
+        <div class="hide">
+        <span class="postacie" id="postacie">
+            <button class="guzik btn btn-outline-secondary btn-lg  cel" onclick="postać(0)">SPEER</button>
+            <button class="guzik btn btn-outline-secondary btn-lg  cel" onclick="postać(1)">SABLIN</button>
+            <button class="guzik btn btn-outline-secondary btn-lg  cel" onclick="postać(2)">TABBY</button>
+            <button class="guzik btn btn-outline-secondary btn-lg  cel" onclick="postać(3)">SPACE MAN</button>
+            <button class="guzik btn btn-outline-secondary btn-lg  cel" onclick="postać(4)">GUMIŚ</button>
+            <button class="guzik btn btn-outline-secondary btn-lg  cel" onclick="postać(5)">BURG SUS</button>
+        </span>
+        <span class="menu">
+            <button class=" btn btn-outline-secondary btn-lg menubutton" onclick="toggleMenu()">卐 MENU 卐</button>
+        </span>
+    </div>
+    
+    </body>
+    <script>
+
+
+
+    antychryst()
+    const speer = document.getElementById("speer")
+    document.addEventListener("keyup", skok);
+    function skok(e){
+        if(e.code==="ArrowUp"){
+            speer.classList.add("skok")
+            setTimeout(function(){
+        speer.classList.remove('skok')
+    },500)
+       }
+
+    }
+
+    function phoneskok(){
+            speer.classList.add("skok")
+            setTimeout(function(){
+        speer.classList.remove('skok')
+    },500)
+
+    }
+    window.onload= function(){
+        setInterval(() => {
+        checkDead()
+    }, 1);
+
+///////////////////////////////////////////////////////////    
+const animated = document.querySelector('.bb');
+
+let punkty=0
+
+animated.addEventListener('animationiteration', () => {
+  punkty++;
+  console.log(`Animation iteration count: ${punkty}`);
+  document.getElementById("punkty").innerHTML  = `: ${punkty}`
+});
+console.log(punkty)
+
+//////////////////////////////////////////////////////////////
+
+    function checkDead(){
+        const bigpoz = document.getElementById("big")
+        const biglok = bigpoz.getBoundingClientRect();
+        const x = biglok.left;
+        const y = biglok.top;
+        const speerpoz = document.getElementById("speer")
+        const speerlok = speerpoz.getBoundingClientRect();
+        const a = speerlok.left;
+        const b = speerlok.top;
+        if(x>a && x<a+speerpoz.clientWidth && y<=b ){
+            console.log("dupa")
+            gameOver()
+        }
+    }
+
+    }
+    function gameOver(){
+        antychryst()
+        alert('NIENAWIDZĘ ANTYCHRYSTA NIENAWIDZĘ ANTYCHRYSTA' );
+        document.getElementById("big").style.animation = "block 1s infinite linear"; 
+        window.location.reload(true);
+        }
+
+    function antychryst(){
+        const cel1 =document.querySelectorAll('.cel1')
+        for(cel of cel1){
+            cel.classList.toggle("paused")
+        }
+    }
+    function vyatka(){
+        const vyatka = new Audio('grafiki/super.mp3');
+        vyatka.play();
+    }
+
+    function toggleMenu(){
+        document.getElementById("postacie").classList.toggle("visible")
+
+    }
+
+    let wybór=0
+    function postać(x){
+         wybór=x
+         let postacie = [
+    {
+        postać: "grafiki/speer.png",
+        przeszkoda: "grafiki/bigBuilding.png",  
+        menu: "卐 MENU 卐",
+        tło: "body-speer",
+        pkt: "Reformy",
+        fontcolor: "yellow",
+    },
+    {
+        postać: "grafiki/sablin.png",
+        przeszkoda: "grafiki/jagody.png",
+        menu: "☭ MENU ☭",
+        tło: "body-sablin",
+        pkt: "Big chungus wholesome moments",
+        fontcolor: "yellow",
+
+    },
+    {
+        postać: "grafiki/tabby.png",
+        przeszkoda: "grafiki/zegarek.png",
+        menu: "卐 MENU 卐",
+        tło: "body-tabby",
+        pkt:"Zbrodnie przeciw ludzkości",
+        fontcolor: "black",
+
+    },
+    {
+        postać: "grafiki/Zhdanov3.png",
+        przeszkoda: "grafiki/ufo.png",
+        menu: "✯ MENU ✯",
+        tło: "body-zhdanov",
+        pkt:"Loty kosmiczne",
+        fontcolor: "yellow",
+
+    },
+    {
+        postać: "grafiki/gum.png",
+        przeszkoda: "grafiki/gumstr.png",
+        menu: "卐 MENU 卐",
+        tło: "body-gum",
+        pkt:"Państwa w Eurazji",
+        fontcolor: "yellow",
+
+    },
+    {
+        postać: "grafiki/Him.png",
+        przeszkoda: "grafiki/sus.png",
+        menu: "ᛋᛋ MENU ᛋᛋ",
+        tło: "body-him",
+        pkt:"Głowice atomowe",
+        fontcolor: "yellow",
+
+    }
+    ]
+    document.querySelector(".speer").innerHTML=`<img src=${postacie[wybór].postać}>`
+    document.querySelector(".bb").innerHTML=`<img src=${postacie[wybór].przeszkoda}>`
+    document.querySelector(".menubutton").innerHTML=`${postacie[wybór].menu}`
+    document.body.classList.remove("body-speer", "body-sablin", "body-tabby", "body-zhdanov", "body-him", "body-gum")
+    document.body.classList.add(postacie[wybór].tło)
+    document.querySelector("#nazwa-pkt").innerHTML=`${postacie[wybór].pkt}`
+    document.querySelector(".menubutton").classList.remove("black","yellow")
+    document.querySelector(".menubutton").classList.add(postacie[wybór].fontcolor)
+
+    const guziki = document.querySelectorAll('.cel');
+    for (const guzik of guziki) {
+        guzik.classList.remove("black","yellow", "guzik")
+        guzik.classList.add(postacie[wybór].fontcolor)
+    }
+    document.querySelector(".menubutton").style.border="none"
+
+    }
+
+    function instrukcja(){
+        alert("skaczesz strzałką w górę na klawiaturze lub guzikiem 'skok' na telefnnie, w menu wybierasz postać, 'start' zaczyna lub pauzuję grę")
+    }
+
+
+    const animated = document.querySelector('.bb');
+
+    </script>
+    </html>
+
+
